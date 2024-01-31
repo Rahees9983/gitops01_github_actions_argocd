@@ -1,1 +1,1 @@
-echo "Hello $env_image_name"
+echo "Hello $ACL_NAME"
