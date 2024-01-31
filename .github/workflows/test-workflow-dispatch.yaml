@@ -39,5 +39,5 @@ jobs:
       - uses: actions/checkout@v4
       - name: execute ls command
         run: ls -ll && pwd
-      - name: cat scripts/print_input.sh
-        run: cat ./scripts/print_input.sh
+      # - name: cat scripts/print_input.sh
+      #   run: cat ./scripts/print_input.sh
