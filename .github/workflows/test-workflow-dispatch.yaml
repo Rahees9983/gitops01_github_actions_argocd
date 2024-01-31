@@ -43,5 +43,5 @@ jobs:
         run: cat scripts/print_inputs.sh
       - name: Passing workflow job env to shell script
         run: |
-        chmod +x scripts/print_inputs.sh
-        ./scripts/print_inputs.sh
+          chmod +x scripts/print_inputs.sh
+          ./scripts/print_inputs.sh
