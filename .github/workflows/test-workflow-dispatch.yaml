@@ -36,3 +36,6 @@ jobs:
         run: echo "env_image_name=${{ inputs.image_name }}" >> $GITHUB_ENV
       - name: print the image name from env
         run: echo "Rahees your image name from env is ${{ env.env_image_name }}"
+      - uses: actions/checkout@v4
+      - name: cat scripts/print_input.sh
+        run: cat ./scripts/print_input.sh

@@ -1,1 +1,1 @@
-echo "Hello"
+echo "Hello $env_image_name"
