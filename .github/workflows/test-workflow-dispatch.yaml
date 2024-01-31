@@ -35,27 +35,29 @@ jobs:
     env: 
       ACR_NAAM: ${{ inputs.acl_name }}
     steps:
-      - name: Printing ACR_NAAM using job level environemnt variable
-        run: echo "ACR_NAAM varibale value defined at job level --->>> $ACR_NAAM"
+      # - name: Printing ACR_NAAM using job level environemnt variable
+      #   run: echo "ACR_NAAM varibale value defined at job level --->>> $ACR_NAAM"
 
-      - name: Printing IMAGE_NAAM defined at workflow level
-        run: echo "Printing IMAGE_NAAM value defined at workflow level --->>> $IMAGE_NAAM"
-      - name: Print the input tag to STDOUT
-        run: echo  The image name is  ${{ inputs.acl_name }}
-      - name: Set image name as env 
-        run: echo "ACL_NAME=${{ inputs.acl_name }}" >> $GITHUB_ENV
+      # - name: Printing IMAGE_NAAM defined at workflow level
+      #   run: echo "Printing IMAGE_NAAM value defined at workflow level --->>> $IMAGE_NAAM"
+      # - name: Print the input tag to STDOUT
+      #   run: echo  The image name is  ${{ inputs.acl_name }}
+      # - name: Set image name as env 
+      #   run: echo "ACL_NAME=${{ inputs.acl_name }}" >> $GITHUB_ENV
       # - name: print the image name from env
       #   run: echo "Rahees your image name from env is ${{ env.env_image_name }}"
       # - name: Set select_environment as Github Action environment
       #   run: echo "selected_env_name=${{ inputs.select_environment }}" >> $GITHUB_ENV
       # - name: Print select_environment value 
       #   run: echo "Rahees slected env value is -->> ${{ env.selected_env_name }}"
-      # - uses: actions/checkout@v4
-      # - name: execute ls command
-      #   run: ls -ll && pwd
-      # - name: cat scripts/print_inputs.sh
-      #   run: cat scripts/print_inputs.sh
-      # - name: Passing workflow job env to shell script
-      #   run: |
-      #     chmod +x scripts/print_inputs.sh
-      #     ./scripts/print_inputs.sh
+      - uses: actions/checkout@v4
+      - name: execute ls command
+        run: |
+          ls -ll
+          pwd
+      - name: cat scripts/print_inputs.sh
+        run: cat scripts/print_inputs.sh
+      - name: Passing workflow job env to shell script
+        run: |
+          chmod +x scripts/print_inputs.sh
+          ./scripts/print_inputs.sh
