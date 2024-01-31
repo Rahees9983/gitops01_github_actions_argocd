@@ -37,5 +37,7 @@ jobs:
       - name: print the image name from env
         run: echo "Rahees your image name from env is ${{ env.env_image_name }}"
       - uses: actions/checkout@v4
+      - name: execute ls command
+        run: ls -ll && pwd
       - name: cat scripts/print_input.sh
         run: cat ./scripts/print_input.sh
