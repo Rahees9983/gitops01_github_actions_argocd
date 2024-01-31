@@ -26,7 +26,7 @@ on:
       
 env: 
   IMAGE_NAAM: ${{ inputs.image_name }}
-  IMAGE_TAG: ${{ inputs.image_name }}
+  IMAGE_TAG: ${{ inputs.image_tag }}
   ACL_NAAM: ${{ inputs.acl_name }}
 jobs:
   print-tag:
