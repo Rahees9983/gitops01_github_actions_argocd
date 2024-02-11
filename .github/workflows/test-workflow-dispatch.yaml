@@ -95,7 +95,7 @@ jobs:
         id: step-two
         run: |
           echo "This is step 2"
-          ls -ll /akki  # This step intentionally fails
+          # ls -ll /akki  # This step intentionally fails
         # continue-on-error: true
 
       - name: Step 3
