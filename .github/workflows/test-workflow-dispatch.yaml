@@ -1,66 +1,90 @@
-name: Test workflow-dispatch
-on:
-  workflow_dispatch:
-    inputs:
-      select_environment:
-        description: 'Select environment'
-        required: true
-        default: 'dev'
-        type: choice
-        options:
-          - dev
-          - test
-          - prod
-      image_name:
-        description: 'Add image name'
-        required: true
-        type: string
-      image_tag:
-        description: 'Add image tag'
-        type: string
-        required: true
-      acl_name:
-        description: 'ACR name'
-        required: true
-        type: string
+# name: Test workflow-dispatch
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       select_environment:
+#         description: 'Select environment'
+#         required: true
+#         default: 'dev'
+#         type: choice
+#         options:
+#           - dev
+#           - test
+#           - prod
+#       image_name:
+#         description: 'Add image name'
+#         required: true
+#         type: string
+#       image_tag:
+#         description: 'Add image tag'
+#         type: string
+#         required: true
+#       acl_name:
+#         description: 'ACR name'
+#         required: true
+#         type: string
       
-env: 
-  IMAGE_NAAM: ${{ inputs.image_name }}
-  IMAGE_TAG: ${{ inputs.image_tag }}
-  ACL_NAAM: ${{ inputs.acl_name }}
-jobs:
-  print-tag:
-    runs-on: ubuntu-latest
-    if:  ${{ inputs.image_name }} 
-    env: 
-      ACR_NAAM: ${{ inputs.acl_name }}
-    steps:
-      # - name: Printing ACR_NAAM using job level environemnt variable
-      #   run: echo "ACR_NAAM varibale value defined at job level --->>> $ACR_NAAM"
+# env: 
+#   IMAGE_NAAM: ${{ inputs.image_name }}
+#   IMAGE_TAG: ${{ inputs.image_tag }}
+#   ACL_NAAM: ${{ inputs.acl_name }}
+# jobs:
+#   print-tag:
+#     runs-on: ubuntu-latest
+#     if:  ${{ inputs.image_name }} 
+#     env: 
+#       ACR_NAAM: ${{ inputs.acl_name }}
+#     steps:
+#       # - name: Printing ACR_NAAM using job level environemnt variable
+#       #   run: echo "ACR_NAAM varibale value defined at job level --->>> $ACR_NAAM"
 
-      # - name: Printing IMAGE_NAAM defined at workflow level
-      #   run: echo "Printing IMAGE_NAAM value defined at workflow level --->>> $IMAGE_NAAM"
-      # - name: Print the input tag to STDOUT
-      #   run: echo  The image name is  ${{ inputs.acl_name }}
-      # - name: Set image name as env 
-      #   run: echo "ACL_NAME=${{ inputs.acl_name }}" >> $GITHUB_ENV
-      # - name: print the image name from env
-      #   run: echo "Rahees your image name from env is ${{ env.env_image_name }}"
-      # - name: Set select_environment as Github Action environment
-      #   run: echo "selected_env_name=${{ inputs.select_environment }}" >> $GITHUB_ENV
-      # - name: Print select_environment value 
-      #   run: echo "Rahees slected env value is -->> ${{ env.selected_env_name }}"
-      - uses: actions/checkout@v4
-      - name: execute ls command
-        run: |
-          ls -ll
-          pwd
-      - name: cat scripts/print_inputs.sh
-        run: cat scripts/print_inputs.sh
-      - name: Passing workflow job env to shell script
-        run: |
-          chmod +x scripts/print_inputs.sh
-          ./scripts/print_inputs.sh
+#       # - name: Printing IMAGE_NAAM defined at workflow level
+#       #   run: echo "Printing IMAGE_NAAM value defined at workflow level --->>> $IMAGE_NAAM"
+#       # - name: Print the input tag to STDOUT
+#       #   run: echo  The image name is  ${{ inputs.acl_name }}
+#       # - name: Set image name as env 
+#       #   run: echo "ACL_NAME=${{ inputs.acl_name }}" >> $GITHUB_ENV
+#       # - name: print the image name from env
+#       #   run: echo "Rahees your image name from env is ${{ env.env_image_name }}"
+#       # - name: Set select_environment as Github Action environment
+#       #   run: echo "selected_env_name=${{ inputs.select_environment }}" >> $GITHUB_ENV
+#       # - name: Print select_environment value 
+#       #   run: echo "Rahees slected env value is -->> ${{ env.selected_env_name }}"
+#       - uses: actions/checkout@v4
+#       - name: execute ls command
+#         run: |
+#           ls -ll
+#           pwd
+#       - name: cat scripts/print_inputs.sh
+#         run: cat scripts/print_inputs.sh
+#       - name: Passing workflow job env to shell script
+#         run: |
+#           chmod +x scripts/print_inputs.sh
+#           ./scripts/print_inputs.sh
+#   my_job:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Step 1
+#         run: echo "This is step 1"
+
+#       - name: Step 2
+#         run: |
+#           echo "This is step 2"
+#           exit 1  # This step intentionally fails
+#         # continue-on-error: true
+
+#       - name: Step 3
+#         if: ${{ failure() }}  # Only run Step 3 if Step 2 fails
+#         run: echo "This is step 3"
+
+name: My Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
   my_job:
     runs-on: ubuntu-latest
     steps:
@@ -71,8 +95,8 @@ jobs:
         run: |
           echo "This is step 2"
           exit 1  # This step intentionally fails
-        # continue-on-error: true
+        continue-on-error: true
 
       - name: Step 3
-        if: ${{ failure() }}  # Only run Step 3 if Step 2 fails
+        if: ${{ failure() }}  # Only run Step 3 if any previous step failed
         run: echo "This is step 3"
