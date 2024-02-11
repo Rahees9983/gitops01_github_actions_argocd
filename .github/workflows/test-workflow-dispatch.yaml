@@ -92,7 +92,7 @@ jobs:
       - name: Check if package is installed
         id: check_package
         run: |
-          if ! sudo dpkg -l | grep -q "httpd"; then
+          if ! sudo dpkg -l | grep -q "nginx"; then
             echo "::set-output name=package_not_installed::true"
           fi
           
@@ -101,5 +101,5 @@ jobs:
         run: |
           # Install your package here
           sudo apt-get update
-          sudo apt-get install -y httpd
+          sudo apt-get install -y nginx
     
