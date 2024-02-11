@@ -91,7 +91,7 @@ jobs:
     steps:
       - name: Check if nginx is installed
         run: |
-          if ! dpkg -l | grep -q "podman"; then
+          if ! dpkg -l | grep -q "podmannn"; then
             echo "nginx is not installed"
           else
             echo "nginx is installed"
