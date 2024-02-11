@@ -61,3 +61,18 @@ jobs:
         run: |
           chmod +x scripts/print_inputs.sh
           ./scripts/print_inputs.sh
+  my_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1
+        run: echo "This is step 1"
+
+      - name: Step 2
+        run: |
+          echo "This is step 2"
+          exit 1  # This step intentionally fails
+        continue-on-error: true
+
+      - name: Step 3
+        if: ${{ failure() }}  # Only run Step 3 if Step 2 fails
+        run: echo "This is step 3"
