@@ -71,7 +71,7 @@ jobs:
         run: |
           echo "This is step 2"
           # exit 1  # This step intentionally fails
-        continue-on-error: true
+        # continue-on-error: true
 
       - name: Step 3
         if: ${{ failure() }}  # Only run Step 3 if Step 2 fails
