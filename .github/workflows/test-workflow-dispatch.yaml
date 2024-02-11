@@ -93,7 +93,8 @@ jobs:
         id: check_package
         run: |
           if ! sudo dpkg -l | grep -q "nginx"; then
-            echo "::set-output name=package_not_installed::true"
+            # echo "::set-output name=package_not_installed::true"
+            echo "package_not_installed=true" >> "$GITHUB_OUTPUT"
           fi
           
       - name: Install package
