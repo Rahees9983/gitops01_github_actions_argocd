@@ -85,21 +85,21 @@ on:
       - master
 
 jobs:
-  my_job:
+  install_package:
     runs-on: ubuntu-latest
-    continue-on-error: true
+    
     steps:
-      - name: Step 1
-        run: echo "This is step 1"
-
-      - name: Step 2
-        id: step-two
+      - name: Check if package is installed
+        id: check_package
         run: |
-          echo "This is step 2"
-          ls -ll /akki  # This step intentionally fails
-        # continue-on-error: true
-
-      - name: Step 3
-       # if: (failure() && steps.step-two.outputs == 'failure')  # Only run Step 3 if any previous step failed
-        if: failure()
-        run: echo "This is step 3"
+          if ! dpkg -l | grep -q "package-name"; then
+            echo "::set-output name=package_not_installed::true"
+          fi
+          
+      - name: Install package
+        if: steps.check_package.outputs.package_not_installed == 'true'
+        run: |
+          # Install your package here
+          apt-get update
+          apt-get install -y package-name
+    
