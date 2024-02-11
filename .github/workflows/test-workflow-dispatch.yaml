@@ -91,7 +91,7 @@ jobs:
     steps:
       - name: Check if nginx is installed
         run: |
-          if ! dpkg -l | grep -q "podmannn"; then
+          if ! dpkg -l | grep -q "jfrog"; then
             echo "jfrog is not installed"
           else
             echo "jfrog is installed"
