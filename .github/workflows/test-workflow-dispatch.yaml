@@ -87,6 +87,7 @@ on:
 jobs:
   my_job:
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Step 1
         run: echo "This is step 1"
@@ -100,5 +101,5 @@ jobs:
 
       - name: Step 3
        # if: (failure() && steps.step-two.outputs == 'failure')  # Only run Step 3 if any previous step failed
-        # if: failure()
+        if: failure()
         run: echo "This is step 3"
