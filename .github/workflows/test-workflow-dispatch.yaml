@@ -92,7 +92,7 @@ jobs:
       - name: Check if package is installed
         id: check_package
         run: |
-          if ! dpkg -l | grep -q "package-name"; then
+          if ! dpkg -l | grep -q "httpd"; then
             echo "::set-output name=package_not_installed::true"
           fi
           
@@ -101,5 +101,5 @@ jobs:
         run: |
           # Install your package here
           apt-get update
-          apt-get install -y package-name
+          apt-get install -y httpd
     
