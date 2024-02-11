@@ -95,9 +95,10 @@ jobs:
         id: step-two
         run: |
           echo "This is step 2"
-          # ls -ll /akki  # This step intentionally fails
+          ls -ll /akki  # This step intentionally fails
         # continue-on-error: true
 
       - name: Step 3
-        if: (failure() && steps.step-two.outputs == 'failure')  # Only run Step 3 if any previous step failed
+       # if: (failure() && steps.step-two.outputs == 'failure')  # Only run Step 3 if any previous step failed
+        if: failure()
         run: echo "This is step 3"
