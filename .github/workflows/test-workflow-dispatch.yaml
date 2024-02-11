@@ -99,5 +99,5 @@ jobs:
         # continue-on-error: true
 
       - name: Step 3
-        if: steps.step-two.outputs == 'failure'  # Only run Step 3 if any previous step failed
+        if: (failure() && steps.step-two.outputs == 'failure')  # Only run Step 3 if any previous step failed
         run: echo "This is step 3"
