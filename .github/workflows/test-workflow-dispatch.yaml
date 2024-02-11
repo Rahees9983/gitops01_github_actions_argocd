@@ -92,11 +92,12 @@ jobs:
         run: echo "This is step 1"
 
       - name: Step 2
+        id: step-two
         run: |
           echo "This is step 2"
           exit 1  # This step intentionally fails
-        continue-on-error: true
+        # continue-on-error: true
 
       - name: Step 3
-        if: ${{ failure() }}  # Only run Step 3 if any previous step failed
+        if: steps.step-two.outputs == 'failure'  # Only run Step 3 if any previous step failed
         run: echo "This is step 3"
