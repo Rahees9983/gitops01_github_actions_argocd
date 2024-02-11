@@ -70,7 +70,7 @@ jobs:
       - name: Step 2
         run: |
           echo "This is step 2"
-          exit 1  # This step intentionally fails
+          # exit 1  # This step intentionally fails
         continue-on-error: true
 
       - name: Step 3
