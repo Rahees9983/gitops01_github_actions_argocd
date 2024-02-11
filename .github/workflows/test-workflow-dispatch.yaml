@@ -90,13 +90,16 @@ jobs:
     
     steps:
       - name: Check if nginx is installed
+        id: check_package
         run: |
           if ! dpkg -l | grep -q "jfrog"; then
             echo "jfrog is not installed"
+            echo "package_not_installed=true" >> "$GITHUB_OUTPUT"
           else
             echo "jfrog is installed"
           fi
       - name: Download JFrog CLI
+        if: steps.check_package.outputs.package_not_installed == 'true'
         run: |
           curl -fL https://getcli.jfrog.io | sh
           mv jfrog /usr/local/bin/jfrog
