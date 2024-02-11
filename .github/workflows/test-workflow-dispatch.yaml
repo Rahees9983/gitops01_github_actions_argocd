@@ -89,18 +89,25 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Check if package is installed
-        id: check_package
+      - name: Check if nginx is installed
         run: |
-          if ! sudo dpkg -l | grep -q "nginx"; then
-            # echo "::set-output name=package_not_installed::true"
-            echo "package_not_installed=true" >> "$GITHUB_OUTPUT"
+          if ! dpkg -l | grep -q "nginx"; then
+            echo "nginx is not installed"
+          else
+            echo "nginx is installed"
           fi
+      # - name: Check if package is installed
+      #   id: check_package
+      #   run: |
+      #     if ! sudo dpkg -l | grep -q "nginx"; then
+      #       # echo "::set-output name=package_not_installed::true"
+      #       echo "package_not_installed=true" >> "$GITHUB_OUTPUT"
+      #     fi
           
-      - name: Install package
-        if: steps.check_package.outputs.package_not_installed == 'true'
-        run: |
-          # Install your package here
-          sudo apt-get update
-          sudo apt-get install -y nginx
+      # - name: Install package
+      #   if: steps.check_package.outputs.package_not_installed == 'true'
+      #   run: |
+      #     # Install your package here
+      #     sudo apt-get update
+      #     sudo apt-get install -y nginx
     
